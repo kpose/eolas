@@ -34,21 +34,62 @@ app.get('/posts', (req, res) => {
       data.forEach((doc) => {
         posts.push({
           postId: doc.id,
-          ...doc.data()
+          body: doc.data().body,
+          userHandle: doc.data().userHandle,
+          createdAt: doc.data().createdAt,
+          commentCount: doc.data().commentCount,
+          likeCount: doc.data().likeCount,
         });
       });
       return res.json(posts);
     })
-    .catch((err) => console.error(err));
-})
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: err.code });
+    });
+});
+
+const FBAuth = (req, res, next) => {
+  let idToken;
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer ')){
+        idToken = req.headers.authorization.split('Bearer ')[1];
+    } else {
+        console.error('No Token Found')
+        return res.status(403).json({ error: 'Unauthorized'});
+    }
+
+    admin.auth().verifyIdToken(idToken)
+        .then(decodedToken => {
+            req.user = decodedToken;
+            console.log(decodedToken);
+            return db.collection('users')
+                .where('userId', '==', req.user.uid)
+                .limit(1)
+                .get();
+        })
+        .then(data => {
+            req.user.handle = data.docs[0].data().handle;
+            return next();
+        })
+        .catch(err => {
+            console.error('Error while verifying token ', err);
+            return res.status(403).json(err);
+        })
+}
 
 
-//functions to create new documents(posts)
+//make single post
 
-app.post('/post', (req, res) => {
+app.post('/post', FBAuth, (req, res) => {
+
+  if (req.body.body.trim() === '') {
+    return res.status(400).json({body: 'Body must not be empty' });
+  }
+
+
   const newPost = {
     body: req.body.body,
-    userHandle: req.body.userHandle,
+    userHandle: req.user.handle,
     createdAt: new Date().toISOString()
   };
 
@@ -63,6 +104,9 @@ app.post('/post', (req, res) => {
       })
 })
 
+
+
+
 const isEmpty = (string) => {
   if(string.trim() === '') return true;
   else return false;
@@ -74,6 +118,9 @@ const isEmail = (email) => {
   if (email.match(regEx)) return true;
   else return false;
 }
+
+
+
 
 
 //sign up
