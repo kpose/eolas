@@ -7,5 +7,19 @@ let db ={
             likeCount: 5,
             commentCount: 2
         }
+    ],
+
+    users: [
+        {
+            userId: 'H9MglKMThwbKgdm48FJV1e4h2gN2',
+            email: 'user4@email.com',
+            handle: 'user4',
+            createdAt: '2020-09-06T08:48:47.270Z',
+            imageUrl: 'image/duenkik',
+            bio: 'hello',
+            website: 'www.google.com',
+            location: 'lagos'
+            
+        }
     ]
 }
