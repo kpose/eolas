@@ -24,4 +24,4 @@ app.post('/user/image', FBAuth, uploadImage)
 
 
 
-exports.api = functions.region('europe-west1').https.onRequest(app);
+exports.api = functions.region('europe-west').https.onRequest(app);

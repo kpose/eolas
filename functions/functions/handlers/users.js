@@ -1,4 +1,4 @@
-const { db } = require('../util/admin'); 
+const { db, admin } = require('../util/admin'); 
 
 const config =require('../util/config');
 const firebase = require('firebase');
@@ -115,7 +115,7 @@ exports.login = (req, res) => {
       file.pipe(fs.createWriteStream(filepath));
     });
     busboy.on('finish', () => {
-      admin.storage().bucket(config.storageBucket).upload(imageToBeUploaded.filepath, {
+      admin.storage().bucket().upload(imageToBeUploaded.filepath, {
           resumable: false,
           metadata: {
             metadata: {
