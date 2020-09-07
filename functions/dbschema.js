@@ -8,10 +8,11 @@ let db ={
             commentCount: 2
         }
     ],
+}
 
-    users: [
-        {
-            userId: 'H9MglKMThwbKgdm48FJV1e4h2gN2',
+const userDetails = {
+    credentials: {
+        userId: 'H9MglKMThwbKgdm48FJV1e4h2gN2',
             email: 'user4@email.com',
             handle: 'user4',
             createdAt: '2020-09-06T08:48:47.270Z',
@@ -19,7 +20,11 @@ let db ={
             bio: 'hello',
             website: 'www.google.com',
             location: 'lagos'
-            
+    }, 
+    likes: [
+        {
+            userHandle: 'user',
+            screenId: 'efjvnwrvjkh'
         }
     ]
 }
