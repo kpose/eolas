@@ -136,7 +136,7 @@ exports.likePost = (req, res) => {
         postData.postId = doc.id;
         return likeDocument.get();
       } else {
-        return res.status(404).json({ error: 'post not found' });
+        return res.status(404).json({ error: 'Post not found' });
       }
     })
     .then((data) => {
@@ -155,7 +155,7 @@ exports.likePost = (req, res) => {
             return res.json(postData);
           });
       } else {
-        return res.status(400).json({ error: 'post already liked' });
+        return res.status(400).json({ error: 'Post already liked' });
       }
     })
     .catch((err) => {
@@ -188,7 +188,7 @@ exports.unlikePost = (req, res) => {
     })
     .then((data) => {
       if (data.empty) {
-        return res.status(400).json({ error: 'post not liked' });
+        return res.status(400).json({ error: 'Post not liked yet' });
       } else {
         return db
           .doc(`/likes/${data.docs[0].id}`)
