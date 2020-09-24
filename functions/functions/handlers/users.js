@@ -112,20 +112,20 @@ exports.addUserDetails = (req, res) => {
 
 
 // Get any user's details
-exports.getUserDetails = (request, response) => {
+exports.getUserDetails = (req, res) => {
     let userData = {};
-    db.doc(`/users/${request.params.handle}`)
+    db.doc(`/users/${req.params.handle}`)
       .get()
       .then((doc) => {
         if (doc.exists) {
           userData.user = doc.data();
           return db
             .collection('posts')
-            .where('userHandle', '==', request.params.handle)
+            .where('userHandle', '==', req.params.handle)
             .orderBy('createdAt', 'desc')
             .get();
         } else {
-          return response.status(404).json({ error: 'User not found' });
+          return res.status(404).json({ error: 'User not found' });
         }
       })
       .then((data) => {
@@ -141,11 +141,11 @@ exports.getUserDetails = (request, response) => {
             postId: doc.id
           });
         });
-        return response.json(userData);
+        return res.json(userData);
       })
       .catch((err) => {
         console.error(err);
-        return response.status(500).json({ error: err.code });
+        return res.status(500).json({ error: err.code });
       });
   };
 
@@ -241,4 +241,23 @@ exports.uploadImage = (req, res) => {
       });
   });
   busboy.end(req.rawBody);
+};
+
+
+//mark notifications as read
+exports.markNotificationsRead = (req, res) => {
+  let batch = db.batch();
+  req.body.forEach((notificationId) => {
+    const notification = db.doc(`/notifications/${notificationId}`);
+    batch.update(notification, { read: true });
+  });
+  batch
+    .commit()
+    .then(() => {
+      return res.json({ message: 'Notifications marked read' });
+    })
+    .catch((err) => {
+      console.error(err);
+      return res.status(500).json({ error: err.code });
+    });
 };
