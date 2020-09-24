@@ -58,7 +58,7 @@ exports.signup = (req, res) => {
       if (err.code === "auth/email-already-in-use") {
         return res.status(400).json({ email: "Email already in use" });
       } else {
-        return res.status(500).json({ error: err.code });
+        return res.status(500).json({ general: 'Something went wrong, please try again'});
       }
     });
 };
@@ -67,30 +67,27 @@ exports.signup = (req, res) => {
 //login user
 exports.login = (req, res) => {
   const user = {
-    email: req.body.email,
-    password: req.body.password,
+      email: req.body.email,
+      password: req.body.password
   };
 
-  const { valid, errors } = validateLoginData(user);
+  const { valid, errors } =  validateLoginData(user);
+ 
   if (!valid) return res.status(400).json(errors);
 
   firebase
-    .auth()
-    .signInWithEmailAndPassword(user.email, user.password)
-    .then((data) => {
-      return data.user.getIdToken();
-    })
-    .then((token) => {
-      return res.json({ token });
-    })
-    .catch((err) => {
-      console.error(err);
-      if (err.code === "auth/wrong-password" || "auth/invalid-email") {
-        return res
-          .status(403)
-          .json({ general: "Wrong credentials, please try again" });
-      } else return res.status(500).json({ error: err.code });
-    });
+      .auth()
+      .signInWithEmailAndPassword(user.email, user.password)
+       .then((data) => {
+           return data.user.getIdToken();
+       })
+       .then((token) => {
+           return res.json({token});
+       })
+       .catch((err) => {
+           console.error(err);
+               return res.status(403).json({ general: 'Wrong credentials, please try again'}); 
+       });
 };
 
 
