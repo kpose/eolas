@@ -110,7 +110,7 @@ export default class WelcomeScreen extends Component {
 
     this.bgY = interpolate(this.buttonOpacity, {
       inputRange: [0, 1],
-      outputRange: [-height / 3 - 50, 0],
+      outputRange: [-height / 2.4 - 50, 0],
       extrapolate: Extrapolate.CLAMP,
     });
 
@@ -148,7 +148,7 @@ export default class WelcomeScreen extends Component {
 
         <View
           style={{
-            height: height / 3,
+            height: height / 2.4,
             justifyContent: 'center',
             /* backgroundColor: 'red' */
           }}>
@@ -173,14 +173,12 @@ export default class WelcomeScreen extends Component {
             <Text style={{...styles.text, color: 'white'}}> SIGN UP</Text>
           </Animated.View>
 
-          {/* <SignIn /> */}
-
           <Animated.View
             style={{
               zIndex: this.textInputZindex,
               opacity: this.textInputOpacity,
               transform: [{translateY: this.textInputY}],
-              height: height / 3,
+              height: height / 2.4,
               ...StyleSheet.absoluteFill,
               top: null,
               justifyContent: 'center',

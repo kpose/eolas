@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View, Dimensions} from 'react-native';
-import Animated, {Easing} from 'react-native-reanimated';
-import {TapGestureHandler, State} from 'react-native-gesture-handler';
+import Animated from 'react-native-reanimated';
+import {Button} from 'react-native-elements';
 
 const {width, height} = Dimensions.get('window');
 
@@ -31,6 +31,26 @@ export default function SignIn() {
       <Animated.View style={styles.button}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}> SIGN IN</Text>
       </Animated.View>
+
+      {/* <Button style={styles.button} title="SIGN IN" type="clear" /> */}
+      <View
+        style={{
+          fontSize: 15,
+          marginTop: 10,
+          padding: 10,
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'row',
+        }}>
+        <Text
+          style={{
+            fontSize: 15,
+          }}>
+          {' '}
+          Don't have an account?
+        </Text>
+        <Button title="Sign up" type="clear" />
+      </View>
     </View>
   );
 }
@@ -41,7 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderWidth: 0.5,
     marginHorizontal: 20,
-    marginVertical: 5,
+    marginVertical: 9,
     paddingLeft: 10,
     borderColor: 'rgba(0,0,0,0.2)',
   },
