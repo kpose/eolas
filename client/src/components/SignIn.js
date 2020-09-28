@@ -7,40 +7,13 @@ const {width, height} = Dimensions.get('window');
 
 const {
   Value,
-  event,
-  block,
-  cond,
-  eq,
-  set,
+
   Clock,
-  startClock,
-  stopClock,
-  debug,
-  timing,
-  clockRunning,
-  interpolate,
+
   Extrapolate,
 } = Animated;
 
 export default function SignIn() {
-  /* this.textInputZindex = interpolate(this.buttonOpacity, {
-    inputRange: [0, 1],
-    outputRange: [1, -1],
-    extrapolate: Extrapolate.CLAMP,
-  });
-
-  this.textInputY = interpolate(this.buttonOpacity, {
-    inputRange: [0, 1],
-    outputRange: [0, 100],
-    extrapolate: Extrapolate.CLAMP,
-  });
-
-  this.textInputOpacity = interpolate(this.buttonOpacity, {
-    inputRange: [0, 1],
-    outputRange: [1, 0],
-    extrapolate: Extrapolate.CLAMP,
-  }); */
-
   return (
     <View>
       <TextInput

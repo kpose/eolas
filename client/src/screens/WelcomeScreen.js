@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
-import {
-  StyleSheet,
-  ImageBackground,
-  Text,
-  View,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import Animated, {Easing} from 'react-native-reanimated';
 import {TapGestureHandler, State} from 'react-native-gesture-handler';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
@@ -116,7 +110,7 @@ export default class WelcomeScreen extends Component {
 
     this.bgY = interpolate(this.buttonOpacity, {
       inputRange: [0, 1],
-      outputRange: [-height / 2.3 - 50, 0],
+      outputRange: [-height / 3 - 50, 0],
       extrapolate: Extrapolate.CLAMP,
     });
 
@@ -154,7 +148,7 @@ export default class WelcomeScreen extends Component {
 
         <View
           style={{
-            height: height / 2.3,
+            height: height / 3,
             justifyContent: 'center',
             /* backgroundColor: 'red' */
           }}>
@@ -186,7 +180,7 @@ export default class WelcomeScreen extends Component {
               zIndex: this.textInputZindex,
               opacity: this.textInputOpacity,
               transform: [{translateY: this.textInputY}],
-              height: height / 2.3,
+              height: height / 3,
               ...StyleSheet.absoluteFill,
               top: null,
               justifyContent: 'center',
