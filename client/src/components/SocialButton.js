@@ -24,7 +24,7 @@ const SocialButton = ({
       style={[styles.buttonContainer, {backgroundColor: bgColor}]}
       {...rest}>
       <View style={styles.iconWrapper}>
-        {/* <FontAwesome
+        {/*  <FontAwesome
           name={btnType}
           style={styles.icon}
           size={22}

@@ -56,8 +56,8 @@ function runTiming(clock, value, dest) {
 }
 
 export default class WelcomeScreen extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.buttonOpacity = new Value(1);
 
     this.onStateChange = event([
