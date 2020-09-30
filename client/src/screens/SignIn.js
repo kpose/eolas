@@ -7,13 +7,7 @@ import {useNavigation} from '@react-navigation/native';
 
 const {width, height} = Dimensions.get('window');
 
-const {
-  Value,
-
-  Clock,
-
-  Extrapolate,
-} = Animated;
+const {Value, Clock, Extrapolate} = Animated;
 
 export default function SignIn() {
   const navigation = useNavigation();
@@ -56,7 +50,7 @@ export default function SignIn() {
         <Button
           title="Sign up"
           type="clear"
-          onPress={() => navigation.navigate('HomeScreen')}
+          onPress={() => navigation.navigate('SignUp')}
         />
       </View>
     </View>

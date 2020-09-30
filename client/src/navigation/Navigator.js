@@ -4,7 +4,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import HomeScreen from '../screens/HomeScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
-import Signup from '../screens/Signup';
+import SignIn from '../screens/SignIn';
+import SignUp from '../screens/SignUp';
+import SigninScreen from '../screens/SigninScreen';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +28,24 @@ function Navigator() {
           name="WelcomeScreen"
           component={WelcomeScreen}
           options={{title: 'Welcome Screen'}}
+        />
+
+        <Stack.Screen
+          name="SignIn"
+          component={SignIn}
+          options={{title: 'Signin Screen'}}
+        />
+
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{title: 'Signup Screen'}}
+        />
+
+        <Stack.Screen
+          name="SigninScreen"
+          component={SigninScreen}
+          options={{title: 'Signin Screen'}}
         />
       </Stack.Navigator>
     </NavigationContainer>
