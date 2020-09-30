@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Dimensions} from 'react-native';
+import {StyleSheet, Text, View, Button, Dimensions} from 'react-native';
 import Animated, {Easing} from 'react-native-reanimated';
 import {TapGestureHandler, State} from 'react-native-gesture-handler';
 import Svg, {Image, Circle, ClipPath} from 'react-native-svg';
 
-import SignIn from '../components/SignIn';
+import SignIn from './SignIn';
 
 const {width, height} = Dimensions.get('window');
 
@@ -56,8 +56,8 @@ function runTiming(clock, value, dest) {
 }
 
 export default class WelcomeScreen extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.buttonOpacity = new Value(1);
 
     this.onStateChange = event([
@@ -121,6 +121,7 @@ export default class WelcomeScreen extends Component {
     });
   }
   render() {
+    const {navigation} = this.props;
     return (
       <View style={styles.container}>
         <Animated.View
@@ -163,15 +164,18 @@ export default class WelcomeScreen extends Component {
             </Animated.View>
           </TapGestureHandler>
 
-          <Animated.View
-            style={{
-              ...styles.button,
-              backgroundColor: 'yellow',
-              opacity: this.buttonOpacity,
-              transform: [{translateY: this.buttonY}],
-            }}>
-            <Text style={{...styles.text, color: 'white'}}> SIGN UP</Text>
-          </Animated.View>
+          <TapGestureHandler
+            onHandlerStateChange={() => navigation.navigate('HomeScreen')}>
+            <Animated.View
+              style={{
+                ...styles.button,
+                backgroundColor: '#5294ba',
+                opacity: this.buttonOpacity,
+                transform: [{translateY: this.buttonY}],
+              }}>
+              <Text style={{...styles.text, color: 'white'}}> SIGN UP</Text>
+            </Animated.View>
+          </TapGestureHandler>
 
           <Animated.View
             style={{

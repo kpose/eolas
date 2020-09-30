@@ -3,6 +3,8 @@ import {StyleSheet, Text, TextInput, View, Dimensions} from 'react-native';
 import Animated from 'react-native-reanimated';
 import {Button} from 'react-native-elements';
 
+import {useNavigation} from '@react-navigation/native';
+
 const {width, height} = Dimensions.get('window');
 
 const {
@@ -14,6 +16,8 @@ const {
 } = Animated;
 
 export default function SignIn() {
+  const navigation = useNavigation();
+
   return (
     <View>
       <TextInput
@@ -49,7 +53,11 @@ export default function SignIn() {
           {' '}
           Don't have an account?
         </Text>
-        <Button title="Sign up" type="clear" />
+        <Button
+          title="Sign up"
+          type="clear"
+          onPress={() => navigation.navigate('HomeScreen')}
+        />
       </View>
     </View>
   );
