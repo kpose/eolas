@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-//import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const {width, height} = Dimensions.get('window');
 
@@ -24,12 +24,12 @@ const SocialButton = ({
       style={[styles.buttonContainer, {backgroundColor: bgColor}]}
       {...rest}>
       <View style={styles.iconWrapper}>
-        {/*  <FontAwesome
+        <FontAwesome
           name={btnType}
           style={styles.icon}
           size={22}
           color={color}
-        /> */}
+        />
       </View>
       <View style={styles.btnTxtWrapper}>
         <Text style={[styles.buttonText, {color: color}]}>{buttonTitle}</Text>

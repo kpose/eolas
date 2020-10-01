@@ -13,7 +13,7 @@ import SocialButton from '../components/SocialButton';
 
 import {useNavigation} from '@react-navigation/native';
 
-export default function Signup() {
+export default function SignUp() {
   const navigation = useNavigation();
 
   const [email, setEmail] = useState();
