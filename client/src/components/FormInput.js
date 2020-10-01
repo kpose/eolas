@@ -3,7 +3,7 @@ import {View, TextInput, StyleSheet, Dimensions} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
-import AntDesign from 'react-native-vector-icons/AntDesign';
+//import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const FormInput = ({labelValue, placeholderText, iconType, ...rest}) => {
   return (
