@@ -1,3 +1,5 @@
+/* This component is currently not used because of dependency issues */
+
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Button, Dimensions} from 'react-native';
 import Animated, {Easing} from 'react-native-reanimated';
