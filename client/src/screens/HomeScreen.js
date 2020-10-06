@@ -10,9 +10,10 @@ import {
   StatusBar,
   Button,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import Post from '../components/Post';
-import Card from '../components/Card';
+//import Card from '../components/Card';
 
 export default function HomeScreen() {
   const [data, setData] = useState();
@@ -24,20 +25,18 @@ export default function HomeScreen() {
   }, []);
 
   let recentPosts = data ? (
-    data.map((post) => <Post post={post} />)
+    data.map((post) => <Post key={post.postId} post={post} />)
   ) : (
-    <Text> loading.....</Text>
+    <ActivityIndicator
+      style={styles.activityIndicator}
+      size="large"
+      color="#00ff00"
+    />
   );
 
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
-      <ScrollView>
-        <Text style={{color: 'red', justifyContent: 'center'}}>
-          HOME SCREEN
-        </Text>
-
-        {recentPosts}
-      </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <ScrollView>{recentPosts}</ScrollView>
     </SafeAreaView>
   );
 }
@@ -46,6 +45,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
+    justifyContent: 'center',
   },
   item: {
     backgroundColor: '#f9c2ff',
@@ -55,6 +55,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

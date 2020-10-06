@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Image, TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity, StyleSheet, Linking} from 'react-native';
 import {
   Container,
   Header,
@@ -14,10 +14,13 @@ import {
   Body,
   Right,
 } from 'native-base';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
 export default class Post extends Component {
   render() {
+    dayjs.extend(relativeTime);
     const {
-      classes,
       post: {
         body,
         createdAt,
@@ -30,41 +33,55 @@ export default class Post extends Component {
     } = this.props;
     return (
       <Container>
-        <Header />
         <Content>
-          <Card>
-            <CardItem>
+          <Card
+            style={{
+              elevation: 4,
+              borderRadius: 20,
+              padding: 10,
+              shadowRadius: 20,
+              shadowColor: 'blue',
+              backgroundColor: '#F2EEEE',
+              marginBottom: 20,
+            }}>
+            <CardItem style={styles.cardBackground}>
               <Left>
-                <Thumbnail source={userImage} />
+                <Thumbnail style={styles.thumbNail} source={userImage} />
                 <Body>
-                  <Text>{userHandle}</Text>
+                  <Text
+                    style={{
+                      color: '#14c6de',
+                    }}
+                    onPress={() => Linking.openURL(`/users/${userHandle}`)}>
+                    {userHandle}
+                  </Text>
                   <Text note>{postId}</Text>
                 </Body>
               </Left>
             </CardItem>
-            <CardItem cardBody>
+            <CardItem cardBody style={styles.cardBackground}>
               {/* <Image
                 source={{uri: 'Image URL'}}
                 style={{height: 200, width: null, flex: 1}}
               /> */}
               <Text>{body}</Text>
             </CardItem>
-            <CardItem>
+
+            <CardItem style={styles.cardBackgrounddd}>
               <Left>
                 <Button transparent>
                   <Icon active name="thumbs-up" />
                   <Text>{likeCount}</Text>
                 </Button>
               </Left>
-              <Body>
+              <Left>
                 <Button transparent>
                   <Icon active name="chatbubbles" />
                   <Text>{commentCount}</Text>
-                  <Text>comments</Text>
                 </Button>
-              </Body>
+              </Left>
               <Right>
-                <Text>11h ago</Text>
+                <Text>{dayjs(createdAt).fromNow()}</Text>
               </Right>
             </CardItem>
           </Card>
@@ -73,3 +90,20 @@ export default class Post extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  cardBackground: {
+    backgroundColor: '#F2EEEE',
+  },
+  cardBackgrounddd: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: '#F2EEEE',
+  },
+  thumbNail: {
+    // maxWidth: 200,
+  },
+  title: {
+    fontSize: 32,
+  },
+});
