@@ -35,9 +35,9 @@ export default function HomeScreen() {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView>{recentPosts}</ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 

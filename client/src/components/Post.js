@@ -34,16 +34,7 @@ export default class Post extends Component {
     return (
       <Container>
         <Content>
-          <Card
-            style={{
-              elevation: 4,
-              borderRadius: 20,
-              padding: 10,
-              shadowRadius: 20,
-              shadowColor: 'blue',
-              backgroundColor: '#F2EEEE',
-              marginBottom: 20,
-            }}>
+          <Card style={styles.card}>
             <CardItem style={styles.cardBackground}>
               <Left>
                 <Thumbnail style={styles.thumbNail} source={userImage} />
@@ -94,6 +85,17 @@ export default class Post extends Component {
 const styles = StyleSheet.create({
   cardBackground: {
     backgroundColor: '#F2EEEE',
+  },
+  card: {
+    elevation: 4,
+    borderRadius: 20,
+    padding: 10,
+    shadowRadius: 10,
+    shadowColor: 'blue',
+    backgroundColor: '#F2EEEE',
+    marginBottom: 10,
+    marginRight: 3,
+    marginLeft: 3,
   },
   cardBackgrounddd: {
     flex: 1,

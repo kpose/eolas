@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
+import axios from 'axios';
 
 import {useNavigation} from '@react-navigation/native';
 
@@ -11,6 +12,31 @@ export default function SigninScreen() {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  //const [loading, setLoading] = useState(false);
+  //const [errors, setErrors] = useState({});
+
+  handleSubmit = () => {
+    //setLoading(true);
+    const userData = {
+      email: email,
+      password: password,
+    };
+    axios
+      .post(
+        'https://europe-west1-eolas-90876.cloudfunctions.net/api/login',
+        userData,
+      )
+      .then((res) => {
+        console.log(res.data);
+        //setLoading(false);
+        navigation.navigate('HomeScreen');
+      })
+      .catch((err) => {
+        console.log(err);
+        //setErrors(err.response.data);
+        //setLoading(false);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -37,7 +63,8 @@ export default function SigninScreen() {
 
       <FormButton
         buttonTitle="Sign In"
-        onPress={() => navigation.navigate('HomeScreen')}
+        //onPress={() => navigation.navigate('HomeScreen')}
+        onPress={this.handleSubmit}
       />
 
       <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
