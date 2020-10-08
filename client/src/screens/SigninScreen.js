@@ -1,9 +1,17 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import axios from 'axios';
+import ProgressBar from 'react-native-progress/Bar';
 
 import {useNavigation} from '@react-navigation/native';
 
@@ -12,11 +20,11 @@ export default function SigninScreen() {
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  //const [loading, setLoading] = useState(false);
-  //const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   handleSubmit = () => {
-    //setLoading(true);
+    setLoading(true);
     const userData = {
       email: email,
       password: password,
@@ -28,13 +36,13 @@ export default function SigninScreen() {
       )
       .then((res) => {
         console.log(res.data);
-        //setLoading(false);
+        setLoading(false);
         navigation.navigate('HomeScreen');
       })
       .catch((err) => {
         console.log(err);
-        //setErrors(err.response.data);
-        //setLoading(false);
+        setErrors(err.response.data);
+        setLoading(false);
       });
   };
 
@@ -44,7 +52,7 @@ export default function SigninScreen() {
       <Text style={styles.text}>Eolas</Text>
 
       <FormInput
-        labelValue={email}
+        label={email}
         onChangeText={(userEmail) => setEmail(userEmail)}
         placeholderText="Email"
         iconType="user"
@@ -60,11 +68,15 @@ export default function SigninScreen() {
         iconType="lock"
         secureTextEntry={true}
       />
+      {errors.general && <Text style={styles.error}>{errors.general}</Text>}
+
+      {loading && <ActivityIndicator size="large" color="#0000ff" />}
 
       <FormButton
         buttonTitle="Sign In"
         //onPress={() => navigation.navigate('HomeScreen')}
         onPress={this.handleSubmit}
+        disabled={loading}
       />
 
       <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
@@ -128,5 +140,10 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#2e64e5',
     //fontFamily: 'Lato-Regular',
+  },
+  error: {
+    color: 'red',
+    fontSize: 15,
+    marginTop: 5,
   },
 });
